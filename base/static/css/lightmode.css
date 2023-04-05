@@ -1,0 +1,295 @@
+:root {
+    --primary: #264b5d;
+    --primary-fg: #f7f7f7;
+    --bg-dark: #34373F;
+    --body-fg: #383A43!important;
+    --body-bg: #282A32;
+    --btn-link-bg: #2368cd;
+    --body-quiet-color: #e0e0e0;
+    --body-loud-color: #ffffff;
+    --breadcrumbs-link-fg: #e0e0e0;
+    --breadcrumbs-bg: var(--primary);
+    --link-fg: #81d4fa;
+    --link-hover-color: #4ac1f7;
+    --link-selected-fg: #6f94c6;
+    --hairline-color: #272727;
+    --border-color: #dddddd;
+    --error-fg: #e35f5f;
+    --message-success-bg: #006b1b;
+    --message-warning-bg: #583305;
+    --message-error-bg: #570808;
+    --darkened-bg: #212121;
+    --selected-bg: #1b1b1b;
+    --selected-row: #00363a;
+    --close-button-bg: rgba(32, 35, 41, 0.815);
+    --close-button-hover-bg: #666666;
+    --active-blue-page: #004297de!important;
+}
+#page-loader{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    background-color: #fff;
+  }
+  #page-loader > span{
+    width: 50px;
+    height: 50px;
+    transition: all .9s ease-in-out;
+    margin-left: 14px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: red;
+    animation: rollwe .8s ease-in-out  infinite alternate;
+
+  }
+  #page-loader .jump1 {
+    background-color: rgb(25, 79, 122);
+    animation-delay: .1s;
+    
+  }
+  #page-loader .jump2 {
+    background-color: rgb(15, 30, 97);
+    animation-delay: .3s;
+  }
+
+  #page-loader .jump3 {
+    background-color: rgb(114, 8, 8);
+    animation-delay: .6s;
+    
+  }
+  @keyframes rollwe {
+    to{
+      transform: translate3d(-12px, 0px, -12px);
+
+      height: 20px;
+      width: 20px;
+      opacity: 0.4;
+    }
+  }
+/* html{
+background-color: #006b1b;
+} */
+
+.bg-light-quiet, .bg-light-nav, .chat-group-page{
+background: var(--primary-fg)!important;
+box-shadow: -2px -1px 7px 0px var(--body-loud-color);
+}
+.posts0a09ama, .msg7ah{
+background: var(--primary-fg)!important;
+box-shadow: -2px -1px 7px 0px var(--body-loud-color);  
+}
+.material-symbols-outlined{
+color: #333333!important;
+}
+body, main{
+background: var(--primary-fg)!important;
+color: #000000!important;
+}
+textarea, input[type='text'], input[type='submit'], input[type='search'], input[type='password'], input[type='file']{
+background: var(--primary-fg)!important;
+font-family: 'Montserrat', sans-serif!important;
+
+color: #000000!important;
+}
+/* button, input[type='search']{
+box-shadow: -2px -1px 7px 0px #28292e;
+border: 1px solid #333536!important; 
+} */
+.fg-dark{
+color: #000000!important;
+}
+.fg-light{
+color: #ffffff!important;
+}
+.chat-sendmessageform input{
+background-color: transparent!important;
+box-shadow: none!important;
+border: none!important;
+}
+.chat-sendmessageform{
+background-color: var(--body-loud-color);
+}
+.bg-light{
+background-color: var(--body-loud-color)!important;
+}
+.sender-message-box{
+    background-color: var(--page-active-dark-blue-color);
+    padding: 6px 9px 6px 9px;
+    border-radius:7px 7px 0px 7px;
+    box-shadow: 2px 2px 11px 2px #66666cad;
+}
+
+.sender-message-box small{
+color: #000000!important;
+}
+.receiver-message-box{
+    background-color: #f7f5f5c7;
+    padding: 6px 9px 6px 9px;
+    border-radius: 7px 7px 7px 0px;
+    box-shadow: 2px 2px 12px 3px #d6d6d6;
+}
+
+.receiver-message-box span, small{
+color: #000000!important;
+}
+hr {
+margin-top: 1rem;
+margin-bottom: 1rem;
+border: 0;
+border-top: 1px solid var(--border-color);
+}
+
+.pb-4.border-bottom{
+border-bottom: 1px solid var(--border-color)!important;
+}
+.comments-s span{
+color: #000000;
+}
+.textarea-dispa09{
+border: 1px solid #fffcfc;
+background: transparent;
+}
+.textarea-dispa09:focus-visible{
+outline: 1px solid #f3f3f3;
+background: transparent;
+}
+.link-dark {
+color: #000000!important;
+}
+.like-comment-99aTrnena span{
+font-size: 14px;
+color: #000000;
+}
+.posts0a09ama p input {
+width: 100%;
+background-color: transparent;
+border: none;
+padding: 4px;
+border-bottom:1px solid #ecececbd;
+color: #000000;
+}
+
+.tabs-divider {
+border-bottom: 1px solid #e9e9e994;
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-bottom-color: rgba(212, 212, 212, 0.58);
+}
+
+.search-form {
+background-color: rgb(228, 228, 228);
+border-radius: 35px;
+padding: 8px;
+background-position: center;
+background-size: contain;
+display: flex;
+align-items: center;
+max-width: 46%;
+min-width: 162px;
+margin-left: 16.65%;
+justify-content: center;
+backdrop-filter: blur(8px);
+transition: all .8s ease-in-out;
+width: 14%;
+color: #fff;
+}
+.container-09a{
+border: 0;
+height: 100vh;
+margin: 0;
+max-height: 100vh;
+max-width: 100vw;
+padding: 0;
+width: 100vw;
+background-size: cover;
+overflow-y: hidden;
+}
+/* .container-fluid{
+background: var(--body-bg)!important;
+border: 0;
+height: 100vh;
+margin: 0;
+max-height: 100vh;
+max-width: 100vw;
+padding: 0;
+width: 100vw;
+overflow-y: hidden;
+} */
+.container-fluid {
+background: var(--primary-fg)!important;
+width: 100%;
+padding-right: 0;
+padding-left: 0;
+margin-right: 0;
+margin-left: 0;
+height: 100vh;
+border: 0;
+overflow: hidden;
+
+}
+.border-none{
+border: none!important;
+}
+.box-shadow-none{
+box-shadow: none!important;
+}
+.active-chat-page{
+background-color: var(--active-blue-page)!important;
+border-radius: 6px;
+cursor: pointer;
+padding: 4px 7px 4px 7px;
+transition: all .1s ease-in-out;
+box-shadow: -2px -1px 7px 0px #28292e!important;
+color: #fff!important;
+}
+
+@media (max-width:700px) {
+  #page-loader{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    background-color: #fff;
+  }
+  #page-loader > span{
+    width: 30px;
+    height: 30px;
+    transition: all .9s ease-in-out;
+    margin-left: 14px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: red;
+    animation: rollwe .6s ease-in-out  infinite alternate;
+
+  }
+  #page-loader .jump1 {
+    background-color: rgb(25, 79, 122);
+    animation-delay: .1s;
+    
+  }
+  #page-loader .jump2 {
+    background-color: rgb(15, 30, 97);
+    animation-delay: .3s;
+  }
+
+  #page-loader .jump3 {
+    background-color: rgb(114, 8, 8);
+    animation-delay: .4s;
+    
+  }
+  @keyframes rollwe {
+    to{
+      transform: translate3d(-7px, 0px, -8px);
+      height: 10px;
+      width: 10px;
+      opacity: 0.4;
+    }
+  }
+}

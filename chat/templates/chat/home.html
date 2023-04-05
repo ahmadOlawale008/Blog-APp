@@ -1,0 +1,27 @@
+{% extends 'chat/chatnav.html' %}
+{% block content %}
+{% load static %}
+<section style="height: 100vh;" class="chatpageSection container-fluid px-0 col-12 col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-12 col-xs-12">
+    <div class="wrap-cmsg">
+    </div>
+    <header class="header">
+        <h3>Type in room name to join room</h3>
+    </header>
+    <input class="form-control" type="text" name="" id="roomInput" size="200" style="padding: 4px;">
+    <input class="btn btn-outline-primary mt-2" id="roomSubmit" type="submit" value="Send">
+</section>
+{% block chatJavascript %} <script type="text/javascript">
+    const roomName = document.querySelector('#roomInput')
+    roomName.focus()
+    const roomSubmit = document.querySelector('#roomSubmit')
+    roomSubmit.addEventListener('click', (e)=>{
+        window.location.pathname = `/chat/room/${roomName.value}/`
+    })
+    roomName.addEventListener('keyup', (e)=>{
+        if(e.keyCode == 13){
+            roomSubmit.click()
+        }
+    })
+</script> {% endblock %}
+
+{% endblock %}

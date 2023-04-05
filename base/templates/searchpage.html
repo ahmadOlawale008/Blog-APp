@@ -1,0 +1,63 @@
+{% extends 'basenav.html' %}
+<title>{% block title %} Search Page {% endblock %}</title>
+
+{% block body_block %}
+{% load static %}
+<style>
+    .active-nav::before{
+        position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    background-color: #d1d1d1;
+    width:100%;
+    height: 2px;
+    border-radius: 9px;
+    }
+    .active-nav{
+        position: relative;
+    }
+    .cursor-pointer{
+        cursor: pointer;
+    }
+</style>
+<div class="search-container container-fluid">
+    <div class="search-page-wrap">
+        <div class="search-page my-3 mx-2">
+            <h2 class="h2">Search Page</h2>
+            <div class="search-form d-flex mx-auto">
+                <input style="background-color: transparent!important; border: none!important;" class="border-none bx-shadow-none form-control" type="search" name="search" id="">
+            </div>
+        </div>
+        <div class="header-links mt-3">
+            <div class="d-flex align-items-center justify-content-between pb-sm-2 px-md-4 px-sm-2 px-xl-4 px-2 ">
+                <div class="filter-posts cursor-pointer active-nav">
+                    <span>Post</span>
+                </div>
+                <div class="filter-profiles cursor-pointer">
+                    <span>Profiles</span>
+                </div>           
+                <div class="filter-comments cursor-pointer">
+                    <span>Comments</span>
+                </div>       
+                <div class="filter-photos cursor-pointer">
+                    <span>Post</span>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+{% block javascript %} <script>
+    function fetchPosts(){
+        fetch('search_page/posts/', {
+            method: 'GET'
+        }).then((response)=>console.log(response))
+        .then(data=>{
+            console.log(data)
+        })
+    }
+    fetchPosts()
+</script> {% endblock %}
+
+{% endblock %}

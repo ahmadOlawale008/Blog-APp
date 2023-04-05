@@ -1,0 +1,112 @@
+{% extends 'chat/chatgroup.html' %}
+{% load static %}
+<title>{% block title %} Chat {{room_name}} {% endblock %}</title>
+
+{% block 'chatgroup' %}
+<style>
+
+    .date-time-ago{
+        font-size: 120px;
+    }
+    .display-none{
+        display: none!important;
+        opacity: 0!important;
+    }
+
+    @media (max-width:800px) {
+    .chat-group-page, .wrap-contenta.navbar-my{
+        display: none!important;
+    }
+    .chat-flex-page {
+        gap: 0.3rem;
+        max-width: 90%;
+    }
+    .img-displayed-chat{
+        display: none;
+    }
+    .col-md-9{
+        flex: 0 0 100%!important;
+        max-width: 100%!important;
+    }
+}
+</style>
+<main class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 px-0">
+    <div class="wrap-content-chatpage" style="height: 100vh!important; overflow-y:scroll ;">
+        <div class="chat-page-desc d-flex align-items-center">
+            <div class="icon-bac my-2 mx-2 rounded-circle-small bg-light rounded-circle d-flex cursor-pointer">
+                <a href="/chat/" class="justify-content-center d-flex text-decoration-none mx-auto align-items-center">
+                    <span class="material-symbols-outlined">
+                        arrow_back_ios
+                    </span>
+                        
+                </a>
+            </div>
+            <a class="text-decoration-none fg-dark" href="{% url 'basic_app:profile' room_name %}">
+                <div class="chat-fl align-items-center d-flex align-items-center" style="gap:1px;justify-content: inherit;">
+                    <div class="wrap-image">
+                        {% if other_profile_user.profile.profile_image %}
+                        <img class="rounded-circle mx-auto rounded-circle-small" src="{{other_profile_user.profile.profile_image.url}}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="wrap-name row mx-0 my-0 flex-column">
+                        <span class="fs-5 my-0 fw-bold">{{room_name}}</span>
+                        <span class="fs-6 font-italic">active 23mins ago</span>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    <hr>
+    <div class="chat-box px-1 py-2">
+        <div class="chat-wrap-content ">
+            <small class="content-dis"></small>
+        </div>
+    </div>
+    <div class="form-wrap">
+        <div class="chat-sendmessageform align-items-center justify-content-between mx-auto mr-2 px-2" style="display: flex; padding: 7px 10px 7px 10px;">
+            <form action="" class="send-message-form">
+                <input class="input-message-form focus-vis-none" type="text" name="" id="" placeholder="Type your message...">
+            </form>
+            <div class="icon-round-colored d-flex align-items-center justify-content-center">
+                <span class="material-symbols-outlined">
+                    send
+                </span>
+            </div>
+        </div>
+        <div class="sendform-icons">
+
+            <div>
+                <span class="material-symbols-outlined">
+                    mic
+                    </span>
+            </div>
+            <div>
+                <span class="material-symbols-outlined">
+                    photo_library
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+{{room_name|json_script:'room_name'}}
+{{room_id|json_script:'room_id'}}
+{{username|json_script:'username'}}
+{{other_profile_user.profile.profile_image.url|json_script:'other_user_image'}}
+{{user.profile.profile_image.url|json_script:'user_image'}}
+
+</main>
+{% endblock %}
+
+{% block chatJavascriptB %}
+<script type="application/javascript">
+
+const room_i = JSON.parse(document.querySelector('#room_id').textContent)
+
+const ur = `ws://${window.location.host}/ws/chat/${room_i}/`
+const socke = new ReconnectingWebSocket(ur)
+const cha = document.querySelectorAll('.content-dis')
+
+</script>
+{% endblock %}
+
+{% block chatJavascript %} <script src="{% static 'js/chat.js' %}"></script> {% endblock %}

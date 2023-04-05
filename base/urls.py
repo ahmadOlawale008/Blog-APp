@@ -1,0 +1,41 @@
+from django.urls import path, re_path
+from . import views
+from django.views.decorators.csrf import csrf_exempt
+app_name = 'basic_app'
+urlpatterns = [
+    path('', views.PostList.as_view(), name='home'),
+    path('json/', views.jsonPage, name='json'),
+    path('json-follower/', views.jsonFollowers.as_view(), name='json-fol'),
+    path('register/validate_username/', csrf_exempt(views.validateUsername), name='validate_username_json'),
+    path('register/validate_email/', csrf_exempt(views.validateUserEmail), name='validateEmail'),
+    path('register/validate_password/', csrf_exempt(views.validatePassword), name='validate_password'),
+    path('register/validate_confirmPassword/', csrf_exempt(views.validateConfirmPassword), name='validate_confirmPaswoword'),
+
+    path(r'^post/(?P<pk>\d+)/$', views.PostDetail.as_view(), name='post'),
+    path(r'^comment/(?P<pk>\d+)/$', views.comment, name='comment'),
+    path(r'^post/(?P<pk>\d+)/edit/$', views.PostUpdate.as_view(), name='edit'),
+    path(r'^post/(?P<pk>\d+)/delete/$', views.PostDelete.as_view(), name='delete'),
+    path('create-post/', views.createPost, name='create'),
+    path('login/', views.loginPage, name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', views.logoutPage, name='logout'),
+    path('profile/<str:pk>/', views.profile, name='profile'),
+    path('settings/', views.settings, name='settings'),
+    path(r'^post/(?P<pk>\d+)/like/$', views.like_post, name='like'),
+    path(r'^follower/<str:pk>/$', views.followUser, name='follow'),
+    path('profile/about/<str:pk>/', views.aboutPage, name='about'),
+    path('<str:post>/delete-comment/<str:pk>/', views.deleteComment, name='deleteComment'),
+    path(r'post/editcomment/<str:post>/<str:pk>/', views.editComment, name='editComment'),
+    path(r'^post/(?P<pk>\d+)/approved-comment/$',views.approveComment, name='approvedComment'),
+    path(r'^post/(?P<pk>\d+)/(?P<ck>\d+)/likecoment/$', views.likeComment, name='likeComment'),
+    path('boot/', views.bootstrap, name='boot'),
+    path('profile/posts/<str:pk>/',views.profilePosts, name='profile_posts'),
+    path('profile/followed/<str:pk>/',views.profile_followers, name='profile_followers'),
+    path('profile/user_followed/<str:pk>/', views.get_user_followed, name='user_followed'),
+    path('post/secondary_comment/<str:pk>/', views.add_secondary_comment, name='add_secondary'),
+    path(r'^secondary_comment/(?P<pk>\d+)$/', views.secondary_comment_page, name='secondary_comment_page'),
+    path('search_page/',views.search, name='search'),
+    path('search_page/posts/', views.searchPage.as_view(), name='searchPosts'),
+    # path("<str:room_name>/", views.room, name="room"),
+    # path('search/json/', views.searchpageJson, name='searchJson'),
+]

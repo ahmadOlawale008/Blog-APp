@@ -1,0 +1,51 @@
+{% extends 'basenav.html' %}
+{% block body_block %}
+{% load static %}
+<title>{% block title %} Edit Post {% endblock %}</title>
+<style>
+    p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: grid;
+}
+
+    form input[type='submit']{
+    display: inline-block;
+font-weight: 400;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+border: 1px solid transparent;
+padding: 0.375rem 0.75rem;
+font-size: 1rem;
+line-height: 1.5;
+border-radius: 0.25rem;
+transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+</style>
+    <section class="editpage0aka">
+        <div class="wrapa-ao09ama">
+            <div class="d-flex icon-bac my-2 rounded-circle-small bg-light rounded-circle justify-content-between d-flex cursor-pointer align-items-center">
+                <button class="back-btn border-none box-shadow-none d-flex align-items-center justify-content-center bg-btn-transparent">
+                    <span class="material-symbols-outlined filled-icon">
+                        arrow_back_ios
+                    </span>
+                </button>
+                <header class="h5 mx-2">Edit Post</header>
+            </div>
+        </div>
+        <div class="page-scroll">
+            <form enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </section>
+{% endblock %}
+{% block javascript %} <script src="{% static 'js/index.js' %}"></script> {% endblock %}

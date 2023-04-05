@@ -1,0 +1,394 @@
+{% extends 'basenav.html' %}
+{% load static %}
+{% block extraCss %} <link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
+
+<title>{% block title %} Post {% endblock %}</title>
+
+{% block body_block %}
+
+<style>
+
+.display-err0oa.was-validated.delete-action.show-delete{
+width: 100%;
+display: flex!important;
+align-items: center;
+justify-content: flex-start;
+flex-wrap: nowrap;
+}
+.oaa00aaoJjak{
+width: 100%;
+overflow-y: scroll;
+padding-bottom: 60px;
+}
+a{
+text-decoration: none;
+}
+.was-validated{
+display: none!important;
+}
+
+.was-validated.show-delete{
+display: block!important;
+}
+.bg-btn-transparent{
+    background-color: transparent!important;
+    border: none;
+}
+.border-none{
+    border: none!important;
+}
+.box-shadow-none{
+    box-shadow: none!important;
+}
+</style>
+<section class="wrapped-content-scroll mt-4">
+<div class="">
+    <div class="d-flex icon-bac my-2 rounded-circle-small bg-light rounded-circle justify-content-between d-flex cursor-pointer align-items-center">
+        <button class="back-btn border-none box-shadow-none d-flex align-items-center justify-content-center bg-btn-transparent">
+            <span class="material-symbols-outlined filled-icon">
+                arrow_back_ios
+            </span>
+        </button>
+        <header class="h5 mx-2">Comment Section</header>
+    </div>
+</div>
+<hr>
+
+<div class="wrap-0akaa91i2 px-xs-1 px-md-1 px-sm-1 px-xl-3  px-1">
+    <div class="oaa00aaoJjak">
+        <div class="posts0a09ama ajajaa234aAjaaa">
+            <div style="display: flex; align-items: center; justify-content: space-between;" class="to0a9aa">
+                <span class="use-aua8a">
+                    <a href="{% url 'basic_app:profile' post.username %}" class="d-flex text-decoration-none align-items-center">
+                        <span>
+                        {% if post.username.profile.profile_image %}
+                            <img class="rounded-circle-small rounded-circle" src="{{post.username.profile.profile_image.url}}" alt="">
+                        {% else %}
+                        <img class="rounded-circle-small rounded-circle"  src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">
+                        {% endif %}
+                        </span>
+                        <span class="fs-5 mx-2">@{{post.username}}</span>
+
+                    </a>
+                </span>
+                <div class="float8aja">
+                    {% if user == post.username %}
+                    <div style="float: right;" class="dropdown">
+                        <a  href="#" style="font-size: 24px; cursor: pointer;" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span style="font-size: 30px!important; color: #000;" class="material-symbols-outlined">
+                                more_horiz
+                                </span></a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="{% url 'basic_app:edit' post.id %}">Edit Post</a></li>
+                            <li><a class="dropdown-item" href="{% url 'basic_app:delete' post.id %}">Delete Post</a></li>
+                        </ul>
+                        </div>
+                    {% endif %}
+                </div>
+   
+                </div>      
+            <div class="pos09acontent ya6ontena">
+                <div class="wrap-yaa">
+                    <a style="text-decoration: none; color: #000;" href="{% url 'basic_app:post' post.id %}">
+                        <span class="fg-dark">
+                            {{post.description|linebreaks|urlize}}
+                        </span>
+                    </a>
+                    <div class="backf5ahImga">
+                        <div class="ima99ajT6gaka-aka">
+                            {% if post.pic %}
+                            <span>
+                                <img src="{{post.pic.url}}" alt="">
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="date-posted-wrap">
+                <span class="date-posted d-flex align-items-center justify-content-between">
+                    <small class="fs-6">{{post.date_posted|timesince}} ago</small>
+                    <small class="fs-6">{% if post.total_likes > 1 %} {{post.total_likes}} Likes {% else %} {{post.total_likes}} Like {% endif %}</small>
+                    <small class="fs-6">Tags: @ola000</small>
+                </span>
+                <hr>
+            </div>  
+            <form action="{% url 'basic_app:comment' post.id %}" class="comment-9ja7ah" method="post">
+                {% csrf_token %}
+                <p>
+                    <input type="text" name="comment" class="focus-vis-none" placeholder="Write a comment...">
+                </p>
+                    <button  class ='bx-shadow-none border-none' type="submit">
+                    <span style="font-size: 150%;" class="material-symbols-outlined">
+                        send
+                    </span></button>
+            </form> 
+            <div style="display: flex; align-items: center; justify-content: space-between;" class="like-comment-99aTrnena">
+                <form class="like-0aak00a" action="{% url 'basic_app:like' post.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="ppost-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow" type="submit">
+                        {% if user in post.likes.all %}
+                        <span style="fill: #fff;" class="material-symbols-outlined filled-icon">
+                            thumb_up
+                        </span>
+                        {% else %}
+                        <span class="material-symbols-outlined">thumb_up</span>{% endif %}
+                        {% if post.total_likes > 1 %}
+                        <span>{{post.total_likes}} Likes</span>
+                        {% else %}
+                        <span>{{post.total_likes}} Like</span>
+                        {% endif %}
+                    </button>
+                </form>
+                <button class="post-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow">
+                    <a style="text-decoration: none; color: #000;" href="{% url 'basic_app:post' post.id %}">
+                        <span class="material-symbols-outlined">
+                            chat_bubble
+                        </span>
+                    </a>
+                </button>
+                <button class="post-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow">
+                    <a style="text-decoration: none; color: #000;" href="">
+                        <span class="material-symbols-outlined">
+                            favorite
+                        </span>
+                    </a>
+                </button>
+            </div>
+         </div>
+        <div class="comments-sect6a5y">
+            <div class="wrap-contents09oa">
+                {% if post.comments.all  %}
+                {% for comment in post.comments.all %}
+                {% if comment.commment_approved == False %}
+                {% if comment.username == post.username %}
+                <div class="wrap-con7ah">
+                    <div class="wrap-oa">
+                        <div class="posts0a09ama ajajaa234aAjaaa">
+                            <div class="a0oala to0a9aa ">
+                                <div class="time-posted-name-9aol d-flex align-items-center justify-content-between use-aua8a">
+                                    <span>
+                                        Creator
+                                    </span>
+                                    <span>
+                                        <a href="{% url 'basic_app:profile' comment.username %}">
+                                        {{comment.comment_posted|timesince}} ago
+
+                                        </a>
+                                    </span>
+                                </div>
+                                <span>
+                                    <div style="float: right;" class="dropdown">
+                                        <a  href="#" style="font-size: 24px; cursor: pointer;" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span style="font-size: 30px!important; color: #000;" class="material-symbols-outlined">
+                                                more_horiz
+                                                </span></a>
+                                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                                            <li><a class="dropdown-item" href="{% url 'basic_app:editComment' post.id comment.id  %}">Edit Comment</a></li>
+                                            <li class="drop-down-delete"><a class="dropdown-item comment">Delete Comment</a></li>
+                                        </ul>
+                                        </div>
+                                </span>
+                            </div>
+                            <div class="comments-s">
+                                <span>{{comment.comment}}</span>
+                            </div>
+                            <hr>
+                            <div style="display: flex; align-items: center; justify-content: space-between;" class="like-comment-99aTrnena">
+                                <form class="like-0aak00a" action="{% url 'basic_app:likeComment' post.id comment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="post-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow" type="submit">
+                                        {% if user in comment.likes.all %}
+                                        <span style="fill: #fff;" class="material-symbols-outlined filled-icon">
+                                            thumb_up
+                                            </span>
+                                        {% else %}
+                                        <span class="material-symbols-outlined">
+                                            thumb_up
+                                            </span>
+                
+                                        {% endif %}
+                                        {% if comment.total_likes > 1 %}
+                                        <span>{{comment.total_likes}} Likes</span>
+                                        {% else %}
+                                        <span>{{comment.total_likes}} Like</span>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <form action="{% url 'basic_app:add_secondary' comment.id %}" class="comment-9ja7ah posts0a09ama" method="post">
+                    {% csrf_token %}
+                    <p>
+                        <input type="text" name="secondary_comment" placeholder="Reply to comment...">
+                    </p>
+                        <button style="    background: transparent;
+                        border: none;" type="submit">
+                        <span style="font-size: 150%;" class="material-symbols-outlined">
+                            send
+                        </span></button>
+                </form> 
+                {% if comment.secondary.all|length > 0 %}
+                {% for sec in comment.secondary.all %}
+                <div class="secondary-comment">
+                    <div style="width: 98%;" class="wrapp-secondary mx-auto posts0a09ama">
+                        <div class="">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span>
+                          <a href="{% url 'basic_app:profile' sec.user %}">{{sec.user}} replied to {% if sec.user.username == comment.username.username %} himself {% else %} {{comment.username}} {% endif %}</a>
+                                </span>
+                                <span>
+                                    {{sec.secondary_comment_created|timesince}} ago
+                                </span>
+                            </div>
+                            <span class="fs-3">
+                                {{sec.secondary}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} 
+                {% endif %} 
+                {% else %} 
+                <div class="posts0a09ama">
+                    <div class="conteny9akkWraopa">
+                        <div class="a0oala to0a9aa ">
+                            <span class="time-posted-name-9aol use-aua8a">
+                                <a href="{% url 'basic_app:profile' comment.username %}">
+                                    <span>@{{comment.username}}{{comment.comment_posted|timesince}} ago
+                                    </span>
+
+                                </a>
+                            </span>
+                            <span>
+                                <div style="float: right;" class="dropdown">
+                                    <a  href="#" style="font-size: 24px; cursor: pointer;" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span style="font-size: 30px!important; color: #000;" class="material-symbols-outlined">
+                                            more_horiz
+                                            </span></a>
+                                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                                        <li><a class="dropdown-item" href="{% url 'basic_app:editComment' post.id comment.id %}">Edit Comment</a></li>
+                                        <li class="drop-down-delete"><a class="dropdown-item comment">Delete Comment</a></li>
+                                    </ul>
+                                    </div>
+                            </span>
+                        </div>
+                        
+                        <div class="comments-s">
+                            <span>{{comment.comment}}</span>
+                        </div>
+                        <hr>
+                        <div style="display: flex; align-items: center; justify-content: space-between;" class="like-comment-99aTrnena">
+                            <form class="like-0aak00a" action="{% url 'basic_app:likeComment' post.id comment.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="post-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow" type="submit">
+                                    {% if user in comment.likes.all %}
+                                    <span style="fill: #fff;" class="material-symbols-outlined filled-icon">
+                                        thumb_up
+                                        </span>
+                                    {% else %}
+                                    <span class="material-symbols-outlined">
+                                        thumb_up
+                                        </span>
+            
+                                    {% endif %}
+                                    {% if comment.total_likes > 1 %}
+                                    <span>{{comment.total_likes}} Likes</span>
+                                    {% else %}
+                                    <span>{{comment.total_likes}} Like</span>
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <form action="{% url 'basic_app:add_secondary' comment.id %}" class="comment-9ja7ah posts0a09ama" method="post">
+                    {% csrf_token %}
+                    <p>
+                        <input type="text" name="secondary_comment" placeholder="Reply to comment...">
+                    </p>
+                        <button  class ='bx-shadow-none border-none' type="submit">
+                        <span style="font-size: 150%;" class="material-symbols-outlined">
+                            send
+                        </span></button>
+                </form> 
+
+                {% if comment.secondary.all|length > 0 %}
+                {% for sec in comment.secondary.all %}
+                <div class="secondary-comment">
+                    <div style="width: 98%;" class="wrapp-secondary mx-auto posts0a09ama">
+                        <div class="">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span>
+                          <a href="{% url 'basic_app:profile' sec.user %}">{{sec.user}} replied to {% if sec.user.username == comment.username.username %} himself {% else %} {{comment.username}} {% endif %}</a>
+                                </span>
+                                <span>
+                                    {{sec.secondary_comment_created|timesince}} ago
+                                </span>
+                            </div>
+                            <span class="fs-3">
+                                {{sec.secondary}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} 
+                {% endif %} 
+                {% endif %}
+                <div class="display-err0oa was-validated delete-action">
+                    <form class="was-validated-form delete-action" action="{% url 'basic_app:deleteComment' post.id comment.id %}" method="post">
+                        {% csrf_token %}
+                        <label for="">Are you sure you want to delete this comment</label>
+                        <p>
+                            <input class="blue-oa" type="submit" value="Delete Comment">
+                        </p>
+                    </form>
+                    <button class="cancel-delete6aj">Cancel</button>
+
+                </div>
+                {% else %}
+                <span>Unapproved comment...{{comment.commment_approved}}</span>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <span class="fs-5 fg-dark mt-5">Be the first to comment...</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+deletebtn = document.querySelectorAll('.drop-down-delete')
+forms = document.querySelectorAll('.was-validated.delete-action')
+cancelBtn = document.querySelectorAll('.cancel-delete6aj')
+deletebtn.forEach((element, index) => {
+cancelBtn[index].addEventListener('click', ()=>{
+    forms[index].classList.remove('show-delete')
+
+})
+
+
+element.addEventListener('click', ()=>{
+    if(forms[index].classList.contains('show-delete')){
+forms[index].classList.remove('show-delete')
+    }
+    else{
+    forms[index].classList.add('show-delete')
+    }
+})
+document.addEventListener('keyup', ()=>{
+forms[index].classList.remove('show-delete')
+})
+});
+</script>
+{% endblock %}
+{% block javascript %} <script src="{% static 'js/index.js' %}"></script> {% endblock %}
+{% block comment %} <script src="{% static 'js/comment.js' %}"></script> {% endblock %}
+

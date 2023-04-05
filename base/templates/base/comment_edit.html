@@ -1,0 +1,24 @@
+{% extends 'basenav.html' %}
+<title>{% block title %} Edit Comment {% endblock %}</title>
+{% block body_block %}
+<div class="">
+    <div class="d-flex icon-bac my-2 rounded-circle-small bg-light rounded-circle justify-content-between d-flex cursor-pointer align-items-center">
+        <button class="back-btn border-none box-shadow-none d-flex align-items-center justify-content-center bg-btn-transparent">
+            <span class="material-symbols-outlined filled-icon ">
+                arrow_back_ios
+            </span>
+        </button>
+        <header class="h5 mx-2">Edit Comment</header>
+    </div>
+</div>
+<hr>
+<div class="section wrapped-content-scroll px-2">
+    <form class="form-group" action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+</form>
+</div>
+{% endblock %}

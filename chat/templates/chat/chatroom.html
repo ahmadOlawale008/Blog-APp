@@ -1,0 +1,69 @@
+{% extends 'chat/chatnav.html' %}
+{% load static %}
+{% block 'chatgroup' %}
+<section style="height: 100vh;" class="chatpageSection container-fluid px-0 col-12 col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-12 col-xs-12">
+    <p>
+        <label for="chat">Send a message</label>
+        <input type="text" name="chat" id="msgInput" class="form-control px-2">
+    </p>
+    <p>
+        <input type="submit" id="msgSubmit" class="btn btn-outline-primary" value="Send">
+    </p>
+
+    <div class="wrap-cmsg">
+    </div>
+    <div class="content"></div>
+    {{room_name|json_script:"roomName"}}
+    {{user_received|json_script:"user_received"}}
+
+</section>
+
+{% endblock %}
+
+{% block chatJavascript %} <script type="text/javascript">
+    const username = JSON.parse(document.querySelector('#user_received').textContent)
+    const content = document.querySelector('.content')
+    const textarea = document.querySelector('#textarea')
+    const chatLog = document.querySelector('.wrap-cmsg')
+    const roomName = JSON.parse(document.querySelector('#roomName').textContent)
+    const url = `ws://${window.location.host}/ws/chat/${roomNamezz}/`
+    const socket = new ReconnectingWebSocket(url)
+    const msgInput = document.getElementById('msgInput')
+    const msgSubmit = document.querySelector('#msgSubmit')
+    msgInput.focus()
+    msgInput.addEventListener('keyup', (e)=>{
+        if(e.keyCode == 13){
+            msgSubmit.click()
+        }
+    })
+    socket.onclose = function(e){
+        console.error('Websocket is closed')
+    }
+
+    socket.onmessage = function(e){
+        const data = JSON.parse(e.data)
+        if(data.command == 'create_message'){
+            if(data.message){
+            const msg = data.message
+            chatLog.insertAdjacentHTML('beforeend', `<p>${msg.description}</p>`)
+        }
+        }if(data.command == 'get_message'){
+            createMessage(data.message)
+        }
+    }
+    function create_message(msg){
+        for(let i = 0; i < msg.length; i++){
+            content.innerHTML += `<p>${data.message}</p>`
+        }
+    }
+    msgInput.addEventListener('keyup', (e)=>{
+        if(e.keyCode == 13){
+            msgSubmit.click()
+        }
+    })
+    msgSubmit.addEventListener('click', (e)=>{
+        socket.send(JSON.stringify({'description': msgInput.value, 'author': username, 'action': 'create_message'}))
+        msgInput.value = ''
+    })
+</script> {% endblock %}
+

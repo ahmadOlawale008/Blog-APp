@@ -1,0 +1,45 @@
+<style>
+    html{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    .button-togl{
+        background-color: rgb(51, 50, 49);
+        width: 300px;
+        height: 70px;
+        position: relative;
+        border-radius: 40px;
+        overflow: hidden;
+        margin: auto;
+    }
+   .button-togl .inner-button{
+        background-color: rgb(134, 134, 134);
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        transition: all .9s ease-in-out;
+        transform: translateY(4px);
+    }.button-togl.active .inner-button{
+        top: 0;
+        left: 80%;
+    }
+
+</style>
+
+<div class="wrap-content">
+    <div class="button-togl">
+        <div class="inner-button">
+
+        </div>
+    </div>
+</div>
+<script>
+    var btn = document.querySelector('.button-togl')
+    btn.addEventListener('click', ()=>{
+        btn.classList.toggle('active')
+    })
+</script>

@@ -1,0 +1,92 @@
+{% extends 'basenav.html' %}
+{% block body_block %}
+{% load static %}
+<style>
+  .paginify{
+    margin-top: 20px;
+    padding: 19px;
+  }
+  .sign-up09a{
+    height: 100vh;
+    overflow-y: scroll;
+    padding-bottom:155px;
+  }
+  header{
+      font-size: calc(var(--font-default-size) + 1.4vw);
+      font-weight: 600;
+    }
+</style>
+<title>{% block title %} Sign Up {% endblock %}</title>
+<section class="sign-up09a paginify my-4">
+  <div class="wra6ga">
+    <header class="h2">Sign Up</header>
+  </div>
+  
+  <form method="post" class="register-form form-group">
+    {% csrf_token %}
+    {% for i in messages %}
+    <li style="color: rgb(218, 7, 7);">{{i}}</li>
+    </ul>
+    {% endfor %}
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer01 h3">First name</label>
+          <input type="text" class="form-control is-valid fs-5" name="firstname" id="validationServer01" placeholder="First name" value="Mark" required>
+
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer02 h3">Last name</label>
+          <input name="lastname" type="text" class="form-control is-valid fs-5" id="validationServer02" placeholder="Last name" value="Otto" required>
+        </div>
+        <div class="col-md-4 username-wrap mb-3">
+          <label for="validationServerUsername h3">Username</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend3">@</span>
+            </div>
+            <input type="text" name="username" class="form-control fs-4 username_field fs-5" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+            <div class="invalid-feedback username_feed-back text-danger">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row my-2">
+          <div class="col-md-4 mb-3 email-wrap">
+              <label for="validationServer03 h3">Email</label>
+              <input name="email" type="email" class="form-control email_field fs-5" id="validationServer03" placeholder="Email" required>
+              <div class="invalid-feedback email-feed-back text-danger">
+              </div>
+            </div>
+            <div class="col-md-4 mb-3 password-wrap">
+              <label for="validationServer04 h3">Password</label>
+              <div class="input-group">
+                <div style="cursor:pointer; " class="input-group-text show-btn-password show-password" id="inputGroupPrepend3"><span class="material-symbols-outlined input-image-prepend" style="color: rgb(32, 31, 31)!important;">visibility</span></div>
+                <input name="password" type="password" class="form-control password_field fs-5" id="validationServer04" placeholder="Password" required>
+                <div class="invalid-feedback password-feed-back text-danger">
+                </div>  
+              </div>
+
+            </div>
+            <div class="col-md-4 mb-3 confirm-wrap">
+              <label for="confirm_password h3">Confirm Your Password</label>
+              <input name="confirm_password" type="password" class="form-control confirm_password_field fs-5" id="validationServer05" placeholder="Confirm Password" required>
+              <div class="invalid-feedback confirm_password-feed-back text-danger">
+              </div>
+            </div>
+      </div>
+      <button  style="width: 100%; padding: 9px 2px 9px 2px; border: 1px solid var(--body-fg)!important; background-color: transparent!important;"  type="submit" class="btn mt-4 submit-btn btn-primary fs-5 fg-dark">Sign up</button>
+    </form>
+    <hr class="my-4">
+
+    <div class="my-2">
+      <p class="fs-5 text-center mt-sm-3 mt-xs-4 mt-xl-4 mt-lg-4">Do you have an account ? </p>
+      <a class="d-flex align-items-center text-decoration-none justify-content-center" href="{% url 'basic_app:login' %}">
+        <button type="button" class="btn btn-primary">
+        Sign In
+      </button>
+    </a>
+    </div>
+</section>
+{% block javascript %} <script src="{% static 'js/register.js' %}"></script> {% endblock %}
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base/profile.html' %}
+{% load static %}
+% load static %}
+{% block extraCss %} <link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
+{% block contentDis %}
+<div class="wrap-content px-2">
+    {% if post %}
+    {% for i in post %}
+    <div class="posts0a09ama my-5 shadow scroll-page ajajaa234aAjaaa">
+        <div style="display: flex; align-items: center; justify-content: space-between;" class="to0a9aa">
+
+            <span class="use-aua8a">
+                <a style="text-decoration: none; color: #007bff;" href="{% url 'basic_app:profile' i.username.profile.user.username %}" class="d-flex align-items-center">
+                    <span class="wrapped-profileImage me-2">
+                    {% if i.username.profile.profile_image %}
+                        <img  src="{{i.username.profile.profile_image.url}}" alt="">
+                    {% else %}
+                    <img  src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">
+                    {% endif %}
+                    </span>
+            @{{i.username}}
+                </a>
+                {% if i.username.is_authenticated %}
+                <span class="mx-3" style="width: 8px; height: 8px; border-radius: 50%; background-color: rgb(45, 226, 29);"></span>
+                {% endif %}
+            </span>
+          
+            <div class="float8aja d-flex align-items-center">
+
+                {% if user == i.username %}
+                <div style="float: right;" class="dropdown">
+                    <a  href="#" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="material-symbols-outlined">
+                                more_horiz</span></a>
+
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" href="{% url 'basic_app:edit' i.id %}">Edit Post</a></li>
+                        <li><a class="dropdown-item" href="{% url 'basic_app:delete' i.id %}">Delete Post</a></li>
+                    </ul>
+                    </div>
+                    {% endif %}
+            </div>
+
+            </div>
+        <div class="pos09acontent ya6ontena">
+            <div class="wrap-yaa">
+                <div class="text-desc">
+                    <a style="text-decoration: none; color: #000;" href="{% url 'basic_app:post' i.id %}">
+                        <span class="fg-dark">
+                            {{i.description|truncatechars:200|linebreaks}} 
+                        </span>
+                    </a>
+                    {% if i.description|length > 200 %}
+                    <a style="color: #007bff; font-size: 1rem;" href="{% url 'basic_app:post' i.id %}">See more</a>
+
+                    {% endif %}
+                </div>
+                <div class="backf5ahImga">
+                    <div class="ima99ajT6gaka-aka">
+                        {% if i.pic %}
+                        <span>
+                            <a href="{{i.pic.url}}"><img src="{{i.pic.url}}" alt=""></a>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="date-posted-wrap">
+            <span class="d-flex align-items-center justify-content-between">
+                <small class="fs-6">{{i.date_posted|timesince}} ago</small>
+                <small class="fs-6">{% if i.total_likes > 1 %} {{i.total_likes}} Likes {% else %} {{i.total_likes}} Like {% endif %}</small>
+                <small class="fs-6">Tags: @ola000</small>
+            </span>
+            <hr>
+        </div>  
+        <form action="{% url 'basic_app:comment' i.id %}" class="comment-9ja7ah" method="post">
+            {% csrf_token %}
+            <p>
+                <input type="text" name="comment" placeholder="Write a comment...">
+            </p>
+                <button  class ='bx-shadow-none border-none' type="submit">
+                <span class="material-symbols-outlined">
+                    send
+                    </span></button>
+        </form> 
+        <div style="display: flex; align-items: center; justify-content: space-between;" class="like-comment-99aTrnena">
+            <form class="like-0aak00a" action="{% url 'basic_app:like' i.id %}" method="post">
+                {% csrf_token %}
+                <button class="post-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow" type="submit">
+    
+                    {% if user in i.likes.all %}
+                    <span style="fill: #fff;" class="material-symbols-outlined filled-icon">
+                        thumb_up
+                    </span>
+                    {% else %}
+                    <span class="material-symbols-outlined">
+                        thumb_up
+                    </span>
+
+                    {% endif %}
+    
+                    {% if i.total_likes > 1 %}
+                    <span>{{i.total_likes}}</span>
+                    {% else %}
+                    <span>{{i.total_likes}}</span>
+                    {% endif %}
+                </button>
+            </form>
+            <button class="post-like-cmt btn-pill btn btn-secondary-s shadow">
+                <a style="text-decoration: none; color: #000;" href="{% url 'basic_app:post' i.id %}">
+                    <span class="material-symbols-outlined">
+                        chat_bubble
+                        </span>
+                </a>
+            </button>
+            <button class="post-like-cmt btn btn-pill btn-secondary-s shadow">
+                <a style="text-decoration: none; color: #000;" href="">
+                    <span class="material-symbols-outlined">
+                        favorite
+                    </span>
+                </a>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

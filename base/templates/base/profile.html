@@ -1,0 +1,205 @@
+{% extends 'basenav.html' %}
+{% block body_block %}
+{% load static %}
+    <style>
+        .wrap-con6ag{
+            background-image:url("{% static 'images/daniel-leone-v7daTKlZzaw-unsplash.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            background-size: cover;
+        }
+        h3{
+            font-size: calc(var(--beep-font-size-num) + 3px);
+        }
+        
+        .wrapped-profileImage img{
+            width: 50px;
+            height: 50px;
+        }
+        .card-img-content{
+            width: 110px;
+            height: 100px;
+            display: flex;
+        }
+        .card-img-content img{
+            object-fit: cover;
+            width: 100%;
+            border-radius: 4px;
+        }
+@media (max-width:900px) {
+    .profile-imagenav{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+.card-img-content{
+    width: 90px;
+    height: 80px;
+    display: flex;
+}
+.container-fluid.col-md-10 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+}
+    </style>
+    <title>{% block title %} Profile Page {% endblock %}</title>
+    <section class="profile09a aert">
+        <div class="wrap-con6ag">
+        </div>
+        <div class="" style="margin-top: -32px;">
+            <div class="d-flex px-1 row align-items-center justify-content-between">
+                    <div class="col-lg-7 col-xl-7 col-xxl-7 col-md-6 col-12">
+                        <div class="">
+                            <style>
+                                .rounded-circle-small.rounded-circle.profile{
+                                    width: 100px!important;
+                                    height: 100px!important;
+                                }
+                                @media (max-width:900px) {
+                        .rounded-circle-small.rounded-circle.profile{
+                            	width: 70px!important;
+                                height: 70px!important;
+                                }                   
+                                }
+
+                            </style>
+                            {%  if profile.profile_image %}
+                            <img class="rounded-circle-small rounded-circle profile" src="{{profile.profile_image.url}}" alt="">
+                            {% else %}
+                            <img class="rounded-circle-small rounded-circle profile" src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">      
+                            {% endif %}
+                        </div>   
+                        <div class="d-flex flex-column">
+                            <span class="mx-1 fs-5">
+                                @{{profile.user.username}}
+                            </span>
+                            <div class="">
+                                <span class="mx-1 fs-6">
+                                    {% if total_posts > 1 %}
+                                    <b>{{total_posts}}</b>
+                                    <b>Posts</b>
+                                    {% else %}
+                                    <b>{{total_posts}}</b>
+                                    <b>Post</b>
+                                    {% endif %}
+                                </span>
+                                <span class="mx-1 fs-6">
+                                    <b>{{total_follower}}</b>
+                                    {% if total_follower > 1 %}<b>Followers</b>{% else %} <b>Follower</b>{% endif %}
+                                </span>
+                                <span class="mx-1 fs-6">
+                                    <b>User Following {{total_following}}</b>
+                                </span>
+                            </div>
+                        </div>
+                    </div>         
+            <div class="btn-group flex-btn-end justify-content-end col-lg-5 col-xl-5 col-xxl-5 col-md-6 col-12">
+                <style>
+                    @media (max-width:760px) {
+                        .flex-btn-end.justify-content-end{
+                            justify-content: flex-start!important;
+                            margin: 12px 0px 12px 0px;
+                        }
+
+                    }
+                </style>
+                {% if user ==  profile.user %}
+                <span class="mr-3">
+                    <a style="color: #fff;" href="/settings/" class="text-decoration-none"><button class="btn btn-outline-primary acct-settings-btn fs-5 active">Account Settings</button>
+                    </a>
+                </span>
+                {% endif %}
+                <form class="" action="{% url 'basic_app:follow' profile.id %}" method="post">
+                    {% csrf_token %}
+                    
+                    {% if follow_bool %}
+                    <button type="submit" class="btn btn-outline-primary fs-5 ">Follow</button>
+                    {% else %}
+                    <button type="submit" class="btn btn-outline-primary fs-5 ">Unfollow</button>
+                    {% endif %}
+                </form>
+            </div>
+            </div>
+            <div class="txt-aola">
+                <span class="d-flex flex-column m-auto align-items-center justify-content-center">
+                    <span class="fs-6">Bio</span>
+                    {% if profile.bio == None %}
+                    <span class="fs-4">
+                        <button class="btn"><a class="text-decoration-none fg-dark" href="">Add to your bio</a></button>
+                    </span>
+                    {% else %}
+                    <span class="fs-3">{{profile.bio|linebreaks}}</span>                   
+                    {% endif %}
+                    
+                </span>
+        </div>
+    </div>
+            <div class="wt6agh">
+                <div class="d-flex px-1 mt-2 align-items-center justify-content-between">
+                    <div class="car6tha about-0ak">
+                        <a class="link-dark fs-6 {% if profile_page == 'home' %} active-nav car6tha {% endif %} flex-columb text-decoration-none" href="{% url 'basic_app:profile' profile.user  %}">Home</a>
+                    </div> 
+                    <div class="car6tha  text-center about-0ak">
+                        <a class="link-dark fs-6 {% if profile_page == 'about' %} active-nav car6tha {% endif %} flex-column text-decoration-none" href="{% url 'basic_app:about' profile.id  %}">About</a>
+                    </div>
+                    <div class="car6tha  text-center settingspAak">
+                        <a class="link-dark fs-6 {% if profile_page == 'posts' %} active-nav car6tha {% endif %} flex-column text-decoration-none" href="{% url 'basic_app:profile_posts' profile.id %}">Posts</a>
+                    </div>
+                    <div class="car6tha text-center followers0ak">
+                        <a class="link-dark fs-6 {% if profile_page == 'followers' %} active-nav car6tha {% endif %} flex-column text-decoration-none" href="{% url 'basic_app:profile_followers' profile.id %}">Followers</a>
+                    </div>
+                    <div class="car6tha text-center user-followeda">
+                        <a class="link-dark fs-6 {% if profile_page == 'user_followed' %} active-nav car6tha {% endif %} flex-column text-decoration-none" href="{% url 'basic_app:user_followed' profile.id %}">User Followed</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tabs-divider my-2"></div>
+            
+            <div class="wrap-block-content p-2">
+                {% block contentDis %}
+                <div style="width: inherit; height: fit-content!important; " class="container-fluid px-0 py-0">
+                    <div class="following-content px-2">
+                        <div class="d-flex mb-3 align-items-center justify-content-between">
+                            <span class="fs-5 fw-bold"> Following....</span>
+                            <span><a href="" class="text-decoration-none fs-5">See all</a></span>
+                        </div>
+                        <div class="wrap-followings">
+                            <div class="card-box">
+                                <div class="flex-cards row mx-0">
+                                {% for i in followers_profile %}
+                                    <div class="card-content d-flex flex-column align-items-center col-xl-2 col-xxl-2 col-lg-2 col-md-4 col-sm-4 col-xs-4 col-4">
+                                        <span class="card-img-content mb-4 card-img-content">
+                                        {% if i.profile_image %}<img class="" src="{{i.profile_image.url}}" alt="">{% endif %}
+                                        </span>
+                                        <span class="fs-5">{{i.user}}</span>
+                                    </div>
+      
+                                    {% endfor %}
+                                </div>
+                                {% if follower_obj_remaining %}
+                                <p>{{follower_obj_remaining}}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tabs-divider my-2"></div>
+                    <div class="contents-added my-2 px-2">
+                        <div class="btn-group">
+                            <button class="btn-outline-primary btn mx-2 fs-5" style="border-radius: 40px;">Images</button>
+                            <button class="btn-outline-primary btn mx-2 fs-5" style="border-radius: 40px;">Others</button>
+
+                        </div>
+                    </div>
+                    </div>
+                {% endblock %}
+
+            </div>
+    
+        </div>
+    </section>
+{% endblock %}

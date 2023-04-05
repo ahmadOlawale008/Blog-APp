@@ -1,0 +1,23 @@
+:root{
+    --bg-dark: #34373F;
+}
+html{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Nunito', sans-serif!important;
+}
+/* Nav */
+.bg-btn-transparent{
+    background-color: transparent!important;
+    border: none;
+}
+.border-none{
+    border: none!important;
+}
+.box-shadow-none{
+    box-shadow: none!important;
+}

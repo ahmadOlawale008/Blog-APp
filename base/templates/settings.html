@@ -1,0 +1,118 @@
+{% extends 'basenav.html' %}
+{% load static %}
+
+{% block CssSettings %}<link rel="stylesheet" href="{% static 'css/settings.css' %}"> {% endblock %}
+{% block body_block %}
+<style>
+
+</style>
+<title>{% block title %} Settings {% endblock %}</title>
+<style>
+    
+</style>
+<section style="overflow-y: scroll;padding-bottom: 60px;height: 100vh;"   class="">
+    <div class="d-flex icon-bac my-2 rounded-circle-small rounded-circle justify-content-between d-flex cursor-pointer align-items-center">
+        <button class="back-btn border-none box-shadow-none d-flex align-items-center justify-content-center bg-btn-transparent">
+            <span class="material-symbols-outlined filled-icon">
+                arrow_back_ios
+            </span>
+        </button>
+        <header class="h5 mx-2">Settings</header>
+    </div>
+    <hr>
+    <div style="border-radius: 12px;" class="wrapper  p-4 mt-sm-5 settings-page">
+        <h4 class="pb-4 d-flex align-items-center justify-content-center">Account settings</h4>
+        <form enctype="multipart/form-data" class="form-group settings-oa" method="post">
+            {% csrf_token %}
+            <div class="d-flex align-items-start py-3 ">
+                {% if profile.profile_image %} 
+                <img src="{% if profile.profile_image %} {{profile.profile_image.url}}  {% else %} {% static 'images/person_outline_black_24dp.svg' %}  {% endif %}" class="rounded-circle rounded-circle-image" alt="">
+                {% else %}
+               <span class="img-handlerg">
+                <img src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">
+               </span>
+                {% endif %}
+                <div class="pl-sm-4 pl-2" id="img-section">
+                    <span class="username09aEd44a" style="background-color: #f8f9fa82; color: #fff; padding: 3px; display: flex; align-items: baseline; justify-content:flex-start;">
+                        <strong style="color: #000;">@</strong>
+                        <input class="text-input" style="background-color: transparent!important; border: none!important;" value="{{profile.user.username}}" type="text" name="username" id="">
+                    </span>
+                    <span style="display: flex; align-items: center;"><img style="width: 19px;" src="{% static 'images/delete_FILL0_wght400_GRAD0_opsz48.svg' %}" alt="">Delete Pic<input style="margin-left: 10px;" type="checkbox" name="checkbox" id=""></span>
+                    <p>Accepted file type .png. Less than 1MB</p>
+                
+                    <input class="input border" type="file" value="Upload Image" name="image" id="">
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="py-2">
+                <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="firstname">First Name</label>
+                        <input type="text" name="first_name" inputmode="" class="bg-light form-control" value="{{profile.user.first_name}}">
+                    </div>
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" name="last_name" class="bg-light form-control" value="{{profile.user.last_name}}">
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="email">Email Address</label>
+                        <input name="email" type="text" class="bg-light form-control" value="{{profile.user.email}}">
+                    </div>
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <label for="location">Location</label>
+                        <input type="text" class="bg-light form-control location" value="{{profile.location}}" name="location" id="">
+                        <!-- <input type="tel" class="bg-light form-control" placeholder="+234"> -->
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-md-12">
+                        <textarea style="width: 100%;" class="form-control"  name="bio" placeholder="{% if profile.bio == None %} Type in your bio... {% endif %}" id="" cols="30" rows="10"> {% if profile.bio %} {{profile.bio}} {% endif %} </textarea>
+                    </div>
+                </div>
+                <!-- <div class="row py-2">
+                    <div class="col-md-6">
+                        
+                        <label for="country">Country</label>
+                        <select name="country" id="country" class="bg-light">
+                            <option value="india" selected>India</option>
+                            <option value="usa">USA</option>
+                            <option value="uk">UK</option>
+                            <option value="uae">UAE</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 pt-md-0 pt-3" id="lang">
+                        <label for="language">Language</label>
+                        <div class="arrow">
+                            <select name="language" id="language" class="bg-light">
+                                <option value="english" selected>English</option>
+                                <option value="english_us">English (United States)</option>
+                                <option value="enguk">English UK</option>
+                                <option value="arab">Arabic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="py-3 pb-4 border-bottom">
+                    <button type="submit" class="btn btn-primary mr-3">Save Changes</button>
+                    <button class="btn border button">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+            <form action="" enctype="" method="post">
+                <div>
+                    <b>Deactivate your account</b>
+                    <p>Details about your account and password</p>
+                </div>
+            </form>
+            <div class="ml-auto">
+                
+                <button class="btn btn-danger">Deactivate</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %} <script src="{% static 'js/index.js' %}"></script> {% endblock %}

@@ -1,0 +1,317 @@
+{% extends 'basenav.html' %}
+{% load static %}
+
+{% block extraCss %} <link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
+
+<title>{% block title %} Home Page {% endblock %}</title>
+{% block jqueryCode %}<script src="{% static 'admin/js/vendor/jquery/jquery.js' %}}"></script> {% endblock %}
+{% block body_block %}
+<style>
+a{
+    text-decoration: none
+}
+.tags-a09ka{
+    display: none;
+}
+
+.not-visible{
+    display: none;
+}
+.textarea-dispa09:focus-visible{
+    outline: 1px solid #5e5e5e;
+    background: transparent;
+}
+
+.tags-a09ka.active{
+    display: block;
+}
+
+.titl0aja header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.paginify-page{
+    height: 100vh;
+    overflow-y: hidden;
+}
+.inner-container-pos_list{
+    overflow-y: scroll;
+    height: 100vh;
+    padding-bottom: 8rem!important;
+}
+.serach-bar-oa9a.conten67hamoia{
+height: 100vh;
+overflow-y: scroll;
+scroll-behavior: smooth;
+scrollbar-width: none;
+}
+::-webkit-scrollbar{
+    width: 2px;
+}
+
+@media(max-width:900px) {
+    .post_list_display{
+        height: 100vh;
+        overflow-y: scroll!important;
+    }
+    .serach-bar-oa9a.conten67hamoia{
+        overflow-y: hidden;
+    }
+
+    .inner-container-pos_list{
+    height: fit-content;
+    padding-bottom: 0rem!important;
+}
+    .material-symbols-outlined{
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    width: 17px;
+    -webkit-font-smoothing: antialiased;
+    font-size: 11px;
+
+}
+.date-posted small{
+        font-size: calc(100% + 9px);
+}
+    .date-posted{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    flex-flow: wrap;
+    font-size: 13px;
+    }
+    .small, small{
+        font-size: 14px;
+    }
+    .titl0aja header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--beep-font-size-num) - 3px);
+}
+
+@media(min-width:900){
+
+    .scroll-page::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: #5e5e5e;
+}
+.scroll-page::-webkit-scrollbar-track{
+    background-color: #464646;
+}
+
+}
+}
+
+</style>
+<section class="paginify-page my-3">
+    <div class="post_list_display row flex-row-reverse container-fluid px-xs-1 px-sm-1  px-xs-1 px-md-1 px-xl-4 py-0 mx-0 my-0">
+        <div class="inner-container-pos_list px-0 py-0 col-xxl-4 col-xl-4 col-lg-4 col-md-4">
+            <div class="">
+                <header class="text-center fs-4">Tweet</header>
+            </div>
+            <div class="trends-peopl place-highest_likes">
+                <div class="wra76ga0KKakaa"> 
+                <form role="form" action="{% url 'basic_app:create' %}" enctype="multipart/form-data" id="creat-0aiform" class=" iploa-post0ak was-validated" method="post">
+                    {% csrf_token %}
+                    <p class="form-group fs-5">
+                        {% if user.profile.profile_image %}
+                        <img src="{{user.profile.profile_image.url}}" alt="" width="32" height="32" class="rounded-circle me-2">
+                        {% else %}
+                        <img src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">
+                        {% endif %}
+                        {% if user.is_active %}
+                        @{{user.username}}
+                        {% else %}
+                        @user
+                        {% endif %}
+                    </p>
+          
+
+                    <p class="form-group">
+                        <a href="" class="d-flex align-items-center"></a>
+                        <textarea style="width: 100%; border-radius: 4px; border: 2px solid #464646;" class="textarea-dispa09 focus-vis-none fs-5" name="description" id="" cols="30" rows="10" placeholder="Write your post..."></textarea>
+                    </p>
+                    <p><input type="file" name="profile_image" id=""></p>
+                    <span class="tags-a09ka form-group">
+                        <small>Tag you followers</small>
+                        <div class="text-center mt-3">
+                            <div class="spinner-border text-primary" role="status"></div>
+                        </div>                   
+                    <select style="width: 100%;" class="selecttagsoa" name="" id="" multiple>
+                    </select>
+                    </span>
+
+                    <button class="tweet-btn" type="submit">Tweet</button>
+                    <span class="error-msg">
+                        <ul class="text-danger my-2">
+                            {% for msg in messages %}
+                            <li class="">
+                                {{msg}}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </form>
+            </div>
+    
+            </div>
+            </div> 
+        <div class="serach-bar-oa9a conten67hamoia px-1 py-0 col-xxl-8 col-xl-8 col-lg-8 col-md-8">
+            <div class="count-post">
+                <span class="h5">{% if totalPost == 1 %} {{ totalPost }} post {% else %} {{ totalPost }} posts {% endif %}</span>
+            </div>
+        <div class="wrap-content">
+        {% for i in posts %}
+        <div class="posts0a09ama my-5 shadow scroll-page ajajaa234aAjaaa">
+            <div style="display: flex; align-items: center; justify-content: space-between;" class="to0a9aa">
+
+                <span class="use-aua8a">
+                    <a style="text-decoration: none; color: #007bff;" href="{% url 'basic_app:profile' i.username.profile.user.username %}" class="d-flex align-items-center">
+                        <span class="wrapped-profileImage me-2">
+                        {% if i.username.profile.profile_image %}
+                            <img  src="{{i.username.profile.profile_image.url}}" alt="">
+                        {% else %}
+                        <img  src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">
+                        {% endif %}
+                        </span>
+                @{{i.username}}
+                    </a>
+                </span>
+              
+                <div class="float8aja d-flex align-items-center">
+
+                    {% if user == i.username %}
+                    <div style="float: right;" class="dropdown">
+                        <a  href="#" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="material-symbols-outlined">
+                                    more_horiz</span></a>
+
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="{% url 'basic_app:edit' i.id %}">Edit Post</a></li>
+                            <li><a class="dropdown-item" href="{% url 'basic_app:delete' i.id %}">Delete Post</a></li>
+                        </ul>
+                        </div>
+                        {% endif %}
+                </div>
+
+                </div>
+            <div class="pos09acontent ya6ontena">
+                <div class="wrap-yaa">
+                    <div class="text-desc">
+                        <a style="text-decoration: none; color: #000;" class="fs-3" href="{% url 'basic_app:post' i.id %}">
+                            <span class="fg-dark">
+                                {{i.description|truncatechars:200|linebreaks}} 
+                            </span>
+                        </a>
+                        {% if i.description|length > 200 %}
+                        <a style="color: #007bff; font-size: 1rem;" href="{% url 'basic_app:post' i.id %}">See more</a>
+
+                        {% endif %}
+                    </div>
+                    <div class="backf5ahImga">
+                        <div class="ima99ajT6gaka-aka">
+                            {% if i.pic %}
+                            <span>
+                                <a href="{{i.pic.url}}"><img src="{{i.pic.url}}" alt=""></a>
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="date-posted-wrap">
+                <span class="d-flex align-items-center justify-content-between">
+                    <small class="fs-6">{{i.date_posted|timesince}} ago</small>
+                    <small class="fs-6">{% if i.total_likes > 1 %} {{i.total_likes}} Likes {% else %} {{i.total_likes}} Like {% endif %}</small>
+                    <small class="fs-6">Tags: @ola000</small>
+                </span>
+                <hr>
+            </div>  
+            <form action="{% url 'basic_app:comment' i.id %}" class="comment-9ja7ah" method="post">
+                {% csrf_token %}
+                <p>
+                    <input type="text" name="comment" class="focus-vis-none" placeholder="Write a comment...">
+                </p>
+                    <button class ='bx-shadow-none border-none' type="submit">
+                    <span class="material-symbols-outlined">
+                        send
+                        </span></button>
+            </form> 
+            <div style="display: flex; align-items: center; justify-content: space-between;" class="like-comment-99aTrnena">
+                <form class="like-0aak00a" action="{% url 'basic_app:like' i.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="post-like-cmt btn btn-pill btn-secondary-s d-flex align-items-center justify-content-center shadow" type="submit">
+        
+                        {% if user in i.likes.all %}
+                        <span style="fill: #fff;" class="material-symbols-outlined filled-icon">
+                            thumb_up
+                        </span>
+                        {% else %}
+                        <span class="material-symbols-outlined">
+                            thumb_up
+                        </span>
+
+                        {% endif %}
+        
+                        {% if i.total_likes > 1 %}
+                        <span>{{i.total_likes}}</span>
+                        {% else %}
+                        <span>{{i.total_likes}}</span>
+                        {% endif %}
+                    </button>
+                </form>
+                <button class="post-like-cmt btn-pill btn btn-secondary-s shadow">
+                    <a style="text-decoration: none; color: #000;" href="{% url 'basic_app:post' i.id %}">
+                        <span class="material-symbols-outlined">
+                            chat_bubble
+                            </span>
+                    </a>
+                </button>
+                <button class="post-like-cmt btn btn-pill btn-secondary-s shadow">
+                    <a style="text-decoration: none; color: #000;" href="">
+                        <span class="material-symbols-outlined">
+                            favorite
+                        </span>
+                    </a>
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+        </div> 
+    </div>
+    <div class="fixed-msga65ha">
+        <img src="{% static 'images/chat_bubble_FILL0b_wght400_GRAD0_opsz48 copy.svg' %}" alt="">
+    </div>
+    <style>
+
+    </style>
+</section>
+{% endblock %}
+{% block javascript %} <script src="{% static 'js/home.js' %}"></script> {% endblock %}
+{% block comment %} {{block.super}} <script>
+    const post = document.querySelector('.textarea-dispa09')
+    const postSub = document.querySelector('.tweet-btn')
+    post.addEventListener('keyup', (e)=>{
+        const val = e.target.value
+        console.log(val)
+        if(val.length < 1){
+            postSub.disabled = true
+        }else{
+            postSub.disabled = false
+        }
+    })
+</script> {% endblock %}

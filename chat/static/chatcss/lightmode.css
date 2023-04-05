@@ -1,0 +1,77 @@
+:root{
+    --font-default-size: 100%;
+    --font-focus-size: .78rem;
+    --font-focus-size-min: 16px;
+    --font-unfocus-size: 100%;
+    --font-unfocus-size-min: 14px;
+    --image-icon-size: 20px;
+    --image-icon-size-min: 14px;
+    --main-color-a: #007bff;
+    --main-color-b: #f8f9fa!important;
+    --bs-width-2xl:  calc(11vw / .98);
+    --primary: #264b5d;
+    --primary-fg: #f7f7f7;
+    --body-fg: #383A43!important;
+    --body-bg: #282A32;
+    --btn-link-bg: #2368cd;
+    --body-quiet-color: #f3f2f2;
+    --body-loud-color: #ffffff;
+    --breadcrumbs-link-fg: #e0e0e0;
+    --breadcrumbs-bg: var(--primary);
+    --link-fg: #81d4fa;
+    --link-hover-color: #4ac1f7;
+    --link-selected-fg: #6f94c6;
+    --hairline-color: #333640;
+    --border-color: #353535;
+    --error-fg: #e35f5f;
+    --message-success-bg: #006b1b;
+    --message-warning-bg: #583305;
+    --message-error-bg: #570808;
+    --darkened-bg: #212121;
+    --selected-bg: #1b1b1b;
+    --selected-row: #00363a;
+    --close-button-bg: rgba(32, 35, 41, 0.815);
+    --close-button-hover-bg: #f3f2f2;
+    --body-white-bg: #f3f2f2;
+    --ms-color-dis: #282828;
+    --beep-font-size-huge: 1.3rem;
+    --beep-font-size-num: 1rem;
+    --beep-font-size-small: .7rem;
+}
+
+/* For message */
+.receiver-message-box span{
+    color: #000000;
+}
+.receiver-message-box{
+    background-color: #f7f5f5c7;
+    padding: 6px 9px 6px 9px;
+    border-radius: 7px 7px 7px 0px;
+    box-shadow: 2px 2px 12px 3px #d6d6d6;
+}
+.chat-sendmessageform {
+    background-color: #eeecec;
+}
+.icon-round-colored{
+    background-color: var(--page-active-dark-blue-color);}
+.icon-round-colored span{
+    color: #fff!important;
+}
+.sender-message-box span{
+    color: #fff;
+}
+.msg7ah{
+    background-color: #ffffff;}
+.msg7ah:hover{
+    background-color: var(--primary-fg);
+
+}
+.chat-group-page{
+    background-color: var(--primary-fg);
+}
+.rounded-coloredbtn{
+    background-color: var(--page-active-blue-color);}
+
+
+
+/* Index css */

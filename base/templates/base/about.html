@@ -1,0 +1,125 @@
+{% extends 'base/profile.html' %}
+<title>{% block title %} About Page {% endblock %}</title>
+
+{% block contentDis %}
+
+{% load static %}
+<style>
+    header{
+        font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    }
+    .img-wrapedd{
+        overflow: hidden;
+    }
+    .wrap-cha span{
+        font-size: 110%;
+    }
+    .img-wrapedd img{
+        aspect-ratio: 9/9;
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .img-wrapedd{
+        transform: translateY(30%);
+    }
+    .img-wrapedd.content51{
+        transform: translateY(0%);
+    }
+    .content-wra{
+        display: grid;
+        gap: 5px;
+    }
+    .wrapper.bg-white,bg-about{
+        display: grid;
+        grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+        gap: 26px;
+    }
+    .wrapper{
+        padding: 30px 50px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin: 10px auto;
+    max-width: calc(73vw/.95);
+    box-shadow: 0px 3px 9px #000000;
+    min-width: 300px;
+    width: 100%;
+    overflow: hidden;
+    }
+    .img-default-wrapped {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(103, 115, 119);
+        border-radius: 50%;
+    }
+    .img-default-wrapped img{
+        width: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    .abt-meaoa.img-conteta67{
+        display: flex;
+    
+    }
+    .settings09a.about-content8a{
+        margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+        .wrapper {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin: 10px auto;
+    max-width: 94%;
+    box-shadow: 0px 3px 9px #000000;
+    min-width: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+    }
+</style>
+<div class="wrapa-ao09ama">
+
+</div>
+<section class="settings09a p-4 shadow  rounded card-box about-content8a">
+
+    <div class="row justify-content-center align-items-center">
+        <div class="wrap-conten col-sm">
+
+            <div class="abt-meaoa">
+                <div class="">
+                    <h3>Details</h3>
+                    <div class="content-wra">
+                        <strong>Bio: </strong> <span>                            {{profile.bio}}
+                        </span>
+
+                        <strong>First Name: </strong> <span>{{profile.user.first_name}}</span>
+                        <strong>Last Name: </strong><span>{{profile.user.last_name}}</span>
+                        <strong>Email:</strong> <span>{{profile.user.email}}</span>
+                        <strong>Location:</strong> <span>{{profile.location}}</span>
+                        <strong>Date Joined: </strong><span>{{profile.user.date_joined}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: relative;" class="abt-meaoa col-lg img-conteta67">
+            {% if profile.profile_image %}
+            <div style="height: fit-content; width: 90%" class="">
+                <img style="width: 100%;" src="{% if profile.profile_image %} {{profile.profile_image.url}}  {% else %} {% static 'images/person_outline_black_24dp.svg' %}  {% endif %}" alt="">
+
+            </div>
+            {% else %}
+            <div class="img-wrapedd content51">
+                <img src="{% static 'images/person_outline_black_24dp.svg' %}" alt="">      
+            </div>
+            {% endif %}
+                </div>
+        </div>
+</section>
+{% endblock %}
+{% block javascript %} <script src="{% static 'js/index.js' %}"></script> {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base/profile.html' %}
+{% block contentDis %}
+{% load static %}
+<style></style>
+<div class="woak00akl" sty>
+        <div>
+            <div>
+                <strong>Followers</strong>
+            </div>
+            <div class="wrap-followers-content px-2">
+                {% for i in followers_profile %}
+                <div class="d-flex  align-items-center my-2  justify-content-between">
+                    <div class="profile-user-content">
+                        <span class="fs-5">{{i.user}}</span>
+                        {% if i.profile_image %} <img class="rounded-circle rounded-circle-image" src="{{i.profile_image.url}}" alt="{{i.user}} profile_pic"> {% else %} <img class="rounded-circle-small rounded-circle"  src="{% static 'images/person_outline_black_24dp.svg' %}" alt="profile image"> {% endif %}
+                    </div>
+                    <div class="mx-3">
+                        <button class="btn btn-secondary fs-5" type="submit">Follow</button>
+                    </div>
+                </div>
+                <hr>
+
+                {% endfor %}
+                </div>
+
+            </div>
+            {% if follower_obj_remaining %}
+            <p>{{follower_obj_remaining}}</p>
+            {% endif %}
+    </div>
+{% load static %}
+{% endblock %}

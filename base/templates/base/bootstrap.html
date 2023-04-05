@@ -1,0 +1,60 @@
+{% extends 'basenav.html' %}
+{% block body_block %}
+<style>
+
+    html{
+        color: #fff;
+    }
+    [class*= col]{
+        background-color: rgb(97, 95, 95);
+        display: inline;
+        padding: 1rem;
+        border: 1px solid #ffffff;
+
+
+    }
+</style>
+<section class="container-md border">
+    <div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"></a>Click
+            <ul class="dropdown-menu">
+            <li class="dropdown-item"><a href="">Hallo</a></li>
+            <li class="dropdown-item"><a href="">Hallo</a></li>
+            <li class="dropdown-item"><a href="">Hallo</a></li>
+            <li class="dropdown-item"><a href="">Hallo</a></li>
+    
+        </ul>
+    </div>
+    <p class="text-danger text-center alert alert-success">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque cum omnis blanditiis?</p>
+    
+    <div class="btn-group btn-group-xs">
+        <button class="btn btn-link-bg btn-xs btn-primary">Primary</button>
+        <button class="btn btn-link-bg btn-xs btn-outline-primary">Primary</button>
+
+    
+        <button class="btn btn-warning">Warning!!</button>
+        <button class="btn btn-outline-warning">Warning!!</button>
+
+        <button class="btn btn-danger">Danger !!!</button>
+        <button class="btn btn-outline-danger">Danger !!!</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-outline-success">Success</button>
+
+
+    </div>
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-4 text-center">column</div>
+        <div class="col-md-8 text-center">column</div>
+        <div class="col-16 text-center">column</div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="pannel-heading">
+            <h4>uhhhh</h4>
+        </div>
+        <div class="panel-title">
+            <p>Lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
