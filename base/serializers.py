@@ -13,6 +13,7 @@ class SearchCommentSerializers(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+        
 class SearchProfileUsersSerializers(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser

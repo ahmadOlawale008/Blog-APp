@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from pathlib import Path
-from channels.routing import ProtocolTypeRouter
+from decouple import config
+print("------------------------------------------>>>>")
+print(config("NAME"))
+
+# from channels.routing import ProtocolTypeRouter
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,22 +27,21 @@ SECRET_KEY = 'django-insecure-rk!8xfpa()ld#5$hr+!@438kyc&z7z$sx+3bfqwj1i6w@g@le3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
-    'channels',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'base',
-    'chat.apps.ChatConfig',
-    'rest_framework',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "base",
+    "chat.apps.ChatConfig",
+    "rest_framework",
+    # "daphne",
+    # "channels",
 ]
 ASGI_APPLICATION = 'blogapp.asgi.application'
 
@@ -79,21 +81,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blogapp.wsgi.application'
-
+from decouple import config
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 # BASE_DIR / 'db.sqlite3',
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogwebsite',
-        'USER':'root',
-        'PASSWORD': 'Zaq1Xsw2Cde3!@#',
-        'PORT': 3306,
-        'HOST': '127.0.0.1',
-        'OPTIONS':{
-        'charset': 'utf8mb4',
-    }
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": config("NAME", default="blogdb"),
+        "USER": config("USER", default="root"),
+        "PASSWORD": config("PASSWORD"),
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
     }
 }
 

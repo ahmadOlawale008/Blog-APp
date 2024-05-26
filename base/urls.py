@@ -35,7 +35,7 @@ urlpatterns = [
     path('post/secondary_comment/<str:pk>/', views.add_secondary_comment, name='add_secondary'),
     path(r'^secondary_comment/(?P<pk>\d+)$/', views.secondary_comment_page, name='secondary_comment_page'),
     path('search_page/',views.search, name='search'),
-    path('search_page/posts/', views.searchPage.as_view(), name='searchPosts'),
+    # path('search_page/posts/', views.searchPage.as_view(), name='searchPosts'),
     # path("<str:room_name>/", views.room, name="room"),
     # path('search/json/', views.searchpageJson, name='searchJson'),
 ]

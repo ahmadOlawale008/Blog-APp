@@ -50,6 +50,10 @@ html{
     font-size: 87%;
     overflow-y: hidden;
 }
+.display-none{
+        display: none!important;
+        opacity: 0!important;
+    }
 .focus-vis-none:focus, input, button{
 outline: none!important;
 outline-width: 1px;
@@ -80,6 +84,7 @@ color: #fff;
 .navbar-toggle{
 display: none;
 }
+
 @media (max-width:900px) {
 .navbar-toggle{
 position: relative;
@@ -193,7 +198,7 @@ z-index: 12;
 <div class="container-fluid px-0 wrap-contents">
     <div class="wrapped-container">
         <div class="header-item-tops bg-light-blue">
-            <div class="d-flex align-items-center px-2 py-1 justify-content-between">
+            <div class="d-flex align-items-center small-screen-search px-2 py-1 justify-content-between navbar-containing-search-light-hamb">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="navbar-toggle">
                         <span></span>
@@ -219,7 +224,7 @@ z-index: 12;
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
-                    <form class="search-form d-flex align-items-center justify-content-between ml-auto" action="{% url 'basic_app:search' %}" method="get">
+                    <form class="search-form d-flex align-items-center small-screen-search-form justify-content-between ml-auto" action="{% url 'basic_app:search' %}" method="get">
                         <input style="background-color: transparent!important; border: none!important; box-shadow: none!important; width: 100%;" type="search" class="search-input" name="search" id="" placeholder="Search...">
                         <button style=" background-color: transparent;
                         border: none;
@@ -243,7 +248,7 @@ z-index: 12;
                             </span>
                         </button>
                     </form>
-                    <span class="mx-3">
+                    <span class="mx-3 user-image">
                         {% if user.is_authenticated == False %}
                         <img src="{% static 'images/person_outline_black_24dp.svg' %} " alt="">
                         {% else %}

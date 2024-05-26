@@ -14,7 +14,8 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponseForbidden
 from django.forms.models import model_to_dict
 import json
-from validate_email import validate_email
+# from validate_email import validate_email
+from django.core.validators import validate_email
 from itertools import chain
 import re
 import os
@@ -194,7 +195,6 @@ def loginPage(request):
                 user_profile_url = '/profile/' + str(username) + '/'     
                 if 'profile/AnonymousUser/' in next:
                     next = user_profile_url
-                    print('yeahhh i am here ')
                 login(request, user)
                 if next != '':
                     return HttpResponseRedirect(next)
@@ -453,6 +453,7 @@ def likeComment(request, pk, ck):
     return HttpResponseRedirect(reverse('basic_app:post', args=[pk]))
     
 def bootstrap(request):
+    
     return render(request, 'base/bootstrap.html')
 
 def profilePosts(request, pk):
@@ -594,15 +595,3 @@ def search(request):
 
 def index(request):
     return render(request, "base/lobby.html")
-from rest_framework.response import Response
-from django.core import serializers
-
-class searchPage(APIView):
-    def get(self, request):
-        post = Post.objects.all()
-        dic = {}
-        res = {'posts': list(post.values('id', 'username', 'description'))}
-        return JsonResponse(res, safe=False)
-        data = SearchPostSerializers(dic, many=True).data
-
-        return Response(data)

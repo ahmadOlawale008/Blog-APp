@@ -20,14 +20,54 @@
     .cursor-pointer{
         cursor: pointer;
     }
+    .added-notifications{
+        display: none!important;
+    }
+    .search-form.ml-auto {
+    display: flex!important;
+}
+
+@media (max-width: 500px) {
+.search-isactive .user-image{
+display: none!important;
+}
+.search-isactive{
+    background: transparent;
+    display: flex!important;
+    align-content: baseline!important;
+    flex-wrap: wrap;
+    justify-content: flex-end!important;
+    width: 30px;
+    max-width: 30px;
+    min-width: 30px;
+}
+.search-form.small-screen-search-form{
+    background: transparent;
+    display: flex!important;
+    align-content: baseline!important;
+    flex-wrap: wrap;
+    justify-content: flex-end!important;
+    width: 30px;
+    max-width: 30px;
+    min-width: 30px;
+}
+.display-none-sm{
+        display: none!important;
+        opacity: 0!important;
+        width: 0px;
+    }
+.small-screen-search   .search-input{
+    display: none!important;
+}
+
+
+}
 </style>
 <div class="search-container container-fluid">
     <div class="search-page-wrap">
         <div class="search-page my-3 mx-2">
             <h2 class="h2">Search Page</h2>
-            <div class="search-form d-flex mx-auto">
-                <input style="background-color: transparent!important; border: none!important;" class="border-none bx-shadow-none form-control" type="search" name="search" id="">
-            </div>
+
         </div>
         <div class="header-links mt-3">
             <div class="d-flex align-items-center justify-content-between pb-sm-2 px-md-4 px-sm-2 px-xl-4 px-2 ">
@@ -49,15 +89,20 @@
     </div>
 </div>
 {% block javascript %} <script>
-    function fetchPosts(){
-        fetch('search_page/posts/', {
-            method: 'GET'
-        }).then((response)=>console.log(response))
-        .then(data=>{
-            console.log(data)
-        })
+const navforsearch = document.querySelector('.navbar-containing-search-light-hamb')
+let userImage = document.querySelector('.user-image')
+let searchForm = document.querySelector('.search-form')
+let searchInput = document.querySelector('search-input')
+searchForm.addEventListener('submit', (e)=>{
+    e.preventDefault()
+    if(window.screen.width < 500){
+        searchForm.classList.add('search-isactive')
+    userImage.classList.add('display-none-sm')
     }
-    fetchPosts()
+})
+
+
+
 </script> {% endblock %}
 
 {% endblock %}
